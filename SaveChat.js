@@ -19,11 +19,12 @@ app.post("/", (req, res) => {
 
     console.log(messageObj.sender);
     console.log(messageObj.message);
+    
     const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'whisperdb'
+        host: 'sql7.freesqldatabase.com',
+        user: 'sql7724126',
+        password: 'V6PCDXyNdv',
+        database: 'sql7724126'
     });
 
     connection.connect((err) => {
