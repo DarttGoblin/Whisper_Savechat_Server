@@ -25,9 +25,6 @@ const pool = mysql.createPool({
 app.post("/", (req, res) => {
     const messageObj = req.body.messageObj;
 
-    console.log(messageObj.sender);
-    console.log(messageObj.message);
-    
     pool.getConnection((err, connection) => {
         if (err) {
             console.error('Error getting database connection: ' + err.stack);
@@ -36,8 +33,8 @@ app.post("/", (req, res) => {
         }
         console.log('Connected to database with connection id ' + connection.threadId);
 
-        const insertQuery = 'INSERT INTO conversation0(messageSender, messageContent) VALUES(?, ?)';
-        connection.query(insertQuery, [messageObj.sender, messageObj.message], (error) => {
+        const insertQuery = 'INSERT INTO conversation0(messageSender, messageContent, messageTimestamp) VALUES(?, ?, ?)';
+        connection.query(insertQuery, [messageObj.sender, messageObj.message, messageObj.timestamp], (error) => {
             connection.release();
             
             if (error) {
